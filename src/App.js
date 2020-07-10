@@ -168,7 +168,7 @@ Select a place below for more:</Typography>
 Map:</Typography><br />
                <Map center={[52.2053, 0.1218]} zoom={13} minZoom={12} maxZoom={17} style={{width: "100%", height: "500px"}}>
     <TileLayer
-      url="https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png"
+      url="https://a.tile.openstreetmap.org/${z}/${x}/${y}.png"
       attribution=""
     />
 {this.props.places.map(item => (
@@ -303,7 +303,7 @@ this.props.dispatch({type: "SET_H2", title: item.name})
 <Paper style={{ padding: "20px 50px" }}>
                <Map center={item.position} zoom={15} minZoom={15} maxZoom={15} zoomControl={false} style={{width: "100%", height: "200px"}}>
     <TileLayer
-      url="https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png"
+      url="https://a.tile.openstreetmap.org/${z}/${x}/${y}.png"
       attribution=""
     />
     <Marker position={item.position}>
@@ -431,7 +431,7 @@ style={{textAlign: "justify"}}
         id="standard-textarea"
         label="Write a review below!"
         placeholder="Enter text here..."
-        multiline onChange={(value) => {this.setState({text: value.target.value})}} value={this.state.text}
+        multiline onChange={(value) => {this.setState({text:	 value.target.value})}} value={this.state.text}
         margin="normal" />
               </Typography>
 
