@@ -18,6 +18,7 @@ import { HashRouter as Router, Route, Link } from "react-router-dom";
 import Input from '@material-ui/core/Input';
 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import L from 'leaflet'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -50,6 +51,7 @@ import 'react-image-lightbox/style.css';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { connect } from 'react-redux'
+
 
 
 const { Star, StarBorder } = require('@material-ui/icons');
@@ -128,6 +130,13 @@ export class Home extends Component {
     }
 
     render() {
+      const wheelIcon = new L.Icon({
+        iconUrl: 'wheelmarker.png',
+        iconRetinaUrl: 'wheelmarker.png',
+        iconAnchor: [12, 41],
+        popupAnchor: [10, -44],
+        iconSize: [25, 41],
+      })
 this.props.dispatch({type: "SET_H2", title: ""})
         return (
 <Row>
@@ -172,7 +181,7 @@ Map:</Typography><br />
       attribution=""
     />
 
-<Marker position={[ 52.2029, 0.1168 ]}>
+<Marker position={[ 52.2029, 0.1168 ]} icon={wheelIcon}>
       <Popup><h4>St Catharine's College</h4>
       </Popup>
     </Marker>
