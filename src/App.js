@@ -171,6 +171,12 @@ Map:</Typography><br />
       url="https://a.tile.openstreetmap.org/${z}/${x}/${y}.png"
       attribution=""
     />
+
+<Marker position={[ 52.2029, 0.1168 ]}>
+      <Popup><h4>St Catharine's College</h4>
+      </Popup>
+    </Marker>
+
 {this.props.places.map(item => (
 
     <Marker position={item.position}>
