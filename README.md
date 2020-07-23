@@ -2,6 +2,9 @@
 
 [Live version available here](https://mcr.caths.cam.ac.uk/rooms)
 
-![](/screenshots/1.jpg)
-![](/screenshots/2.jpg)
-![](/screenshots/3.jpg)
+<div align="center">
+        <img width="66%" src="https://raw.githubusercontent.com/souramoo/mcr-room-database/master/screenshots/1.png" />
+        <img width="66%" src="https://raw.githubusercontent.com/souramoo/mcr-room-database/master/screenshots/2.png" />
+        <img width="66%" src="https://raw.githubusercontent.com/souramoo/mcr-room-database/master/screenshots/3.png" />
+</div>
+
