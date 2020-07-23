@@ -509,6 +509,24 @@ export class Base extends Component {
 this.state= {loading: true}
   }
 
+  async postData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
+
 
   async componentDidMount(){
       var dat = await fetch(API + "/accom_list")
@@ -519,10 +537,17 @@ this.state= {loading: true}
       this.props.dispatch({type: "SET_PLACES", places: data.places})
 
       var places = []
+      var postcodes = []
       for(var o of data.places) {
-          var loc = await fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+encodeURIComponent(o.address)+'&key=AIzaSyDQyz5iLsAsXz07bmXYl2bUoAJFrNKPFGk');
-          var lJson = await loc.json();
-          places.push([lJson.results[0].geometry.location.lat, lJson.results[0].geometry.location.lng])
+        var postcode = o.address.split(",").map(s => s.trim().match(/([A-Za-z]{1,2}\d{1,2})(\s?(\d?\w{2}))?/)).filter(e => e)
+        postcode = postcode[0][0]
+        postcodes.push(postcode)
+      }
+      console.log(postcodes)
+      var lJson = await this.postData('https://api.postcodes.io/postcodes', {"postcodes": postcodes});
+      for(var o of lJson.result) {
+        console.log(o)
+        places.push([o.result.latitude, o.result.longitude])
       }
         
       this.props.dispatch({type: "SET_LOCATIONS", position: places})
